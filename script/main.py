@@ -1,5 +1,6 @@
 # IMPORTE O SELENIUM
 
+from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -30,13 +31,30 @@ password.clear()
 username.send_keys("cyb311y") 
 password.send_keys("cybelly@echo") 
 
-
 log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click() # clickar em logar
 not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Agora não')]"))).click() # não salvar os dados de login
 disable = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Agora não')]"))).click() # não ligar as notificação
-
-searchbox = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Search']")))
+searchbox = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Pesquisar']"))) # clickar no campo de busca
 searchbox.clear()
-Keyword = "#cat"
-searchbox.send_keys(Keyword)
-searchbox.send_keys(Keys.ENTER)
+hashtag = "cat" # o que sera digitado no campo de busca
+driver.get("https://www.instagram.com/explore/tags/" + hashtag + "/") 
+
+n_scrolls = 3
+for i in range(1, n_scrolls):
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    sleep(5)
+    
+images = driver.find_element_by_tag_name("img")
+images = [image.get_attribute("src") for image in images]
+
+path = os.getcwd()
+path = os.path.join(path, keyword[1:] + "s")
+
+os.mkdir(path)
+path
+
+counter = 0
+for image in images:
+    save_as = os.path.join(path, keyword[1:] + str(counter) + ".jpg")
+    wget.download(image, save_as)
+    counter += 1
