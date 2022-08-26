@@ -28,8 +28,8 @@ username.clear()
 password.clear()
 
 # inserindo o (usuario) e (senha)
-username.send_keys("cyb311y") 
-password.send_keys("cybelly@echo") 
+username.send_keys("*******") 
+password.send_keys("************") 
 
 log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click() # clickar em logar
 not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Agora não')]"))).click() # não salvar os dados de login
